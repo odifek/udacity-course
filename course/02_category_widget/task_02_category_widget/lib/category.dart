@@ -11,12 +11,16 @@ import 'package:flutter/material.dart';
 /// The widget is composed on an [Icon] and [Text]. Tapping on the widget shows
 /// a colored [InkWell] animation.
 class Category extends StatelessWidget {
+  final String name;
+  final IconData icon;
+  final Color color;
+
   /// Creates a [Category].
   ///
   /// A [Category] saves the name of the Category (e.g. 'Length'), its color for
   /// the UI, and the icon that represents it (e.g. a ruler).
   // TODO: You'll need the name, color, and iconLocation from main.dart
-  const Category();
+  const Category(this.name, this.icon, this.color);
 
   /// Builds a custom widget that shows [Category] information.
   ///
@@ -27,7 +31,38 @@ class Category extends StatelessWidget {
   // Theme ancestor in the tree. Below, we obtain the display1 text theme.
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
-    // TODO: Build the custom widget here, referring to the Specs.
-    return Container();
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        height: 100.0,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(60.0),
+          onTap: () {
+            print("I was tapped!");
+          },
+          highlightColor: color,
+          splashColor: color,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Icon(
+                    icon,
+                    size: 60.0,
+                  ),
+                ),
+                Text(
+                  name,
+                  style: TextStyle(fontSize: 24.0),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
